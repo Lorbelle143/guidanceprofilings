@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Guidance & Counseling Office — NBSC League of Peer Counselors</title>
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#1a7a6e" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
@@ -11,6 +13,9 @@
   <link rel="stylesheet" href="extras.css" />
 </head>
 <body>
+  <!-- CUSTOM CURSOR -->
+  <div id="cursorDot" class="cursor-dot"></div>
+  <div id="cursorRing" class="cursor-ring"></div>
 
   <!-- LOADING SCREEN -->
   <div id="loadingScreen" class="loading-screen">
@@ -100,10 +105,11 @@
   <section class="hero">
     <div class="hero-bg" style="background-image:url('assets/building.jpg')"></div>
     <div class="hero-overlay"></div>
+    <canvas id="heroParticles" class="hero-particles"></canvas>
     <div class="hero-inner">
       <div class="hero-text">
         <div class="hero-eyebrow"><i class="fas fa-hands-helping"></i> League of Peer Counselors</div>
-        <h1>Empowering Students,<br/><em>Building Communities</em></h1>
+        <h1>Empowering Students,<br/><em class="gradient-text">Building Communities</em></h1>
         <p>A student-led organization under the Guidance &amp; Counseling Office of Northern Bukidnon State College — dedicated to peer support, holistic development, and transformative student growth.</p>
         <div class="hero-actions">
           <a href="#moderators" class="btn-hero-primary">Meet the Team</a>
@@ -112,15 +118,15 @@
       </div>
       <div class="hero-stats">
         <div class="stat-box">
-          <span class="stat-num">2</span>
+          <span class="stat-num" data-count="2">0</span>
           <span class="stat-label">Moderators</span>
         </div>
         <div class="stat-box">
-          <span class="stat-num">8</span>
+          <span class="stat-num" data-count="8">0</span>
           <span class="stat-label">Officers</span>
         </div>
         <div class="stat-box">
-          <span class="stat-num">5</span>
+          <span class="stat-num" data-count="5">0</span>
           <span class="stat-label">Members</span>
         </div>
       </div>
@@ -363,5 +369,13 @@
 
   <script src="script.js"></script>
   <script src="extras.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .catch(err => console.warn('SW registration failed:', err));
+      });
+    }
+  </script>
 </body>
 </html>

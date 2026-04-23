@@ -596,3 +596,175 @@ body.dark-mode .dark-mode-btn {
   .back-to-top { bottom: 24px; right: 16px; }
   .lightbox-content img { width: 220px; height: 220px; }
 }
+
+/* =============================================================
+   VISUAL ENHANCEMENTS
+   Particles · Glassmorphism · Gradient Text · Custom Cursor
+   ============================================================= */
+
+/* ===== CUSTOM CURSOR ===== */
+@media (pointer: fine) {
+  body { cursor: none; }
+  a, button, .officer-tile, .member-tile, .mod-card,
+  .lightbox-trigger, .nav-link, .btn-hero-primary, .btn-hero-ghost {
+    cursor: none;
+  }
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: #4ecdc4;
+  border-radius: 50%;
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, background 0.2s;
+  will-change: transform;
+}
+
+.cursor-ring {
+  width: 36px;
+  height: 36px;
+  border: 2px solid rgba(78,205,196,0.6);
+  border-radius: 50%;
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, border-color 0.2s, transform 0.08s ease;
+  will-change: transform;
+}
+
+.cursor-ring.hovered {
+  width: 52px;
+  height: 52px;
+  border-color: rgba(78,205,196,0.9);
+  background: rgba(78,205,196,0.06);
+}
+
+.cursor-dot.hovered {
+  transform: translate(-50%, -50%) scale(1.8);
+  background: #1a7a6e;
+}
+
+/* ===== HERO PARTICLES CANVAS ===== */
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Push hero content above canvas */
+.hero-inner {
+  z-index: 3 !important;
+}
+
+/* ===== GRADIENT TEXT ===== */
+.gradient-text {
+  background: linear-gradient(135deg, #4ecdc4 0%, #a8edea 40%, #4ecdc4 70%, #1a7a6e 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 4s linear infinite;
+  font-style: normal;
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Section heading gradient accents */
+.section-header h2 {
+  background: linear-gradient(135deg, #0d1b2e 60%, #1a7a6e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-header.light h2 {
+  background: linear-gradient(135deg, #ffffff 50%, #4ecdc4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===== GLASSMORPHISM — MOD CARDS ===== */
+.mod-card {
+  background: rgba(255, 255, 255, 0.75) !important;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  box-shadow: 0 8px 32px rgba(13, 27, 46, 0.12),
+              inset 0 1px 0 rgba(255,255,255,0.6) !important;
+}
+
+.mod-card:hover {
+  background: rgba(255, 255, 255, 0.88) !important;
+  box-shadow: 0 20px 48px rgba(13, 27, 46, 0.18),
+              inset 0 1px 0 rgba(255,255,255,0.8) !important;
+}
+
+/* ===== GLASSMORPHISM — OFFICER TILES ===== */
+.officer-tile {
+  background: rgba(255, 255, 255, 0.72) !important;
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.45) !important;
+  box-shadow: 0 4px 20px rgba(13, 27, 46, 0.08),
+              inset 0 1px 0 rgba(255,255,255,0.5) !important;
+}
+
+.officer-tile:hover {
+  background: rgba(255, 255, 255, 0.92) !important;
+  box-shadow: 0 12px 36px rgba(13, 27, 46, 0.14),
+              inset 0 1px 0 rgba(255,255,255,0.7) !important;
+}
+
+/* ===== GLASSMORPHISM — STAT BOXES ===== */
+.stat-box {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2),
+              inset 0 1px 0 rgba(255,255,255,0.15) !important;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s !important;
+}
+
+.stat-box:hover {
+  background: rgba(255, 255, 255, 0.14) !important;
+  transform: translateY(-4px) !important;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.3) !important;
+}
+
+/* ===== DARK MODE ADJUSTMENTS ===== */
+body.dark-mode .mod-card {
+  background: rgba(13, 27, 46, 0.75) !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+
+body.dark-mode .officer-tile {
+  background: rgba(13, 27, 46, 0.72) !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+
+body.dark-mode .section-header h2 {
+  background: linear-gradient(135deg, #e2e8f0 50%, #4ecdc4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Hide cursor on touch devices */
+@media (pointer: coarse) {
+  .cursor-dot, .cursor-ring { display: none; }
+}

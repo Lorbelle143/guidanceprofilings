@@ -162,3 +162,152 @@ if (officerInput) {
     }
   });
 }
+
+// =============================================================
+//  VISUAL ENHANCEMENTS
+//  Particles · Animated Counter · Custom Cursor
+// =============================================================
+
+// ===== HERO PARTICLES =====
+(function () {
+  const canvas = document.getElementById('heroParticles');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function randomBetween(a, b) { return a + Math.random() * (b - a); }
+
+  function createParticle() {
+    return {
+      x:     randomBetween(0, W),
+      y:     randomBetween(0, H),
+      r:     randomBetween(1.5, 4),
+      dx:    randomBetween(-0.4, 0.4),
+      dy:    randomBetween(-0.6, -0.15),
+      alpha: randomBetween(0.15, 0.55),
+      color: Math.random() > 0.5 ? '78,205,196' : '255,255,255',
+    };
+  }
+
+  function init() {
+    resize();
+    particles = Array.from({ length: 70 }, createParticle);
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${p.color},${p.alpha})`;
+      ctx.fill();
+
+      p.x += p.dx;
+      p.y += p.dy;
+      p.alpha -= 0.0008;
+
+      // Reset when faded or out of bounds
+      if (p.alpha <= 0 || p.y < -10 || p.x < -10 || p.x > W + 10) {
+        Object.assign(p, createParticle(), { y: H + 5, alpha: randomBetween(0.15, 0.55) });
+      }
+    });
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); });
+  init();
+  draw();
+})();
+
+// ===== ANIMATED COUNTER =====
+(function () {
+  const counters = document.querySelectorAll('.stat-num[data-count]');
+  if (!counters.length) return;
+
+  function animateCount(el) {
+    const target   = parseInt(el.dataset.count, 10);
+    const duration = 1200;
+    const start    = performance.now();
+
+    function step(now) {
+      const elapsed  = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease out cubic
+      const ease = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(ease * target);
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  // Trigger when hero stats come into view
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCount(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(el => observer.observe(el));
+})();
+
+// ===== CUSTOM CURSOR =====
+(function () {
+  const dot  = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  if (!dot || !ring) return;
+
+  // Only on non-touch devices
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+
+  let mouseX = 0, mouseY = 0;
+  let ringX  = 0, ringY  = 0;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    dot.style.left = mouseX + 'px';
+    dot.style.top  = mouseY + 'px';
+  });
+
+  // Smooth ring follow
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    ring.style.left = ringX + 'px';
+    ring.style.top  = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  // Hover effect on interactive elements
+  const hoverTargets = 'a, button, .officer-tile, .member-tile, .mod-card, .lightbox-trigger, .stat-box, .contact-info-card';
+  document.querySelectorAll(hoverTargets).forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      dot.classList.add('hovered');
+      ring.classList.add('hovered');
+    });
+    el.addEventListener('mouseleave', () => {
+      dot.classList.remove('hovered');
+      ring.classList.remove('hovered');
+    });
+  });
+
+  // Hide when leaving window
+  document.addEventListener('mouseleave', () => {
+    dot.style.opacity  = '0';
+    ring.style.opacity = '0';
+  });
+  document.addEventListener('mouseenter', () => {
+    dot.style.opacity  = '1';
+    ring.style.opacity = '1';
+  });
+})();
