@@ -1,0 +1,255 @@
+/* ===== ORG CHART PAGE ===== */
+
+.org-main {
+  padding: 60px 24px 80px;
+  background: #f0f4f8;
+}
+
+.org-tree-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* VERTICAL CONNECTOR */
+.tree-connector-v {
+  width: 3px;
+  height: 40px;
+  background: linear-gradient(to bottom, #1a7a6e, #dde3ea);
+  border-radius: 2px;
+}
+
+.tree-connector-v.short { height: 24px; }
+
+/* TREE LEVEL */
+.tree-level {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* TREE NODE — big card */
+.tree-node {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: white;
+  border-radius: 20px;
+  padding: 20px 32px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  min-width: 480px;
+  max-width: 600px;
+  width: 100%;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-left: 6px solid #dde3ea;
+}
+
+.tree-node:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 36px rgba(0,0,0,0.13);
+}
+
+.node-president { border-left-color: #f5a623; }
+.node-vp        { border-left-color: #0d1b2e; }
+.node-dean      { border-left-color: #2d9cdb; }
+.node-head      { border-left-color: #1a7a6e; }
+
+/* BIG PHOTO */
+.tree-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 4px solid #f0f4f8;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+.node-president .tree-photo { border-color: #f5a623; }
+.node-vp        .tree-photo { border-color: #0d1b2e; }
+.node-dean      .tree-photo { border-color: #2d9cdb; }
+.node-head      .tree-photo { border-color: #1a7a6e; }
+
+.tree-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tree-info {
+  flex: 1;
+}
+
+.tree-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+}
+
+.badge-gold  { background: rgba(245,166,35,0.15); color: #c47d00; }
+.badge-navy  { background: rgba(13,27,46,0.08);   color: #0d1b2e; }
+.badge-teal  { background: rgba(26,122,110,0.12); color: #1a7a6e; }
+.badge-blue  { background: rgba(45,156,219,0.12); color: #2d9cdb; }
+
+.tree-info h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0d1b2e;
+  line-height: 1.3;
+}
+
+/* LPC DIVIDER */
+.lpc-divider {
+  margin: 8px 0;
+}
+
+.lpc-divider span {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #0d1b2e;
+  color: white;
+  padding: 12px 36px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.lpc-divider span i { color: #4ecdc4; font-size: 1.1rem; }
+
+/* LPC SECTION — 3 columns */
+.lpc-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.lpc-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lpc-col-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #1a7a6e;
+  padding: 0 4px;
+  margin-bottom: 4px;
+}
+
+.lpc-center .lpc-col-label { color: #f5a623; }
+
+/* LPC NODE — big photo */
+.lpc-node {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: white;
+  border-radius: 16px;
+  padding: 18px 20px;
+  border-left: 4px solid #dde3ea;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.lpc-node:hover {
+  transform: translateX(4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.10);
+}
+
+.mod-node    { border-left-color: #1a7a6e; background: #f0faf9; }
+.pres-node   { border-left-color: #f5a623; background: #fffbf0; }
+.vp-ext-node { border-left-color: #0d1b2e; }
+
+/* BIG LPC PHOTO */
+.lpc-photo {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 3px solid #e8edf2;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.mod-node    .lpc-photo { border-color: #1a7a6e; }
+.pres-node   .lpc-photo { border-color: #f5a623; }
+.vp-ext-node .lpc-photo { border-color: #0d1b2e; }
+
+.lpc-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lpc-info b {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0d1b2e;
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+
+.lpc-info span {
+  font-size: 0.85rem;
+  color: #6b7c93;
+  font-weight: 500;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .lpc-section { grid-template-columns: 1fr; }
+  .tree-node { min-width: unset; width: 100%; }
+  .org-tree-wrap { padding: 0 8px; }
+}
+
+@media (max-width: 600px) {
+  .tree-node { flex-direction: column; text-align: center; padding: 20px 16px; gap: 14px; }
+  .tree-photo { width: 90px; height: 90px; }
+  .tree-info h3 { font-size: 0.95rem; }
+  .tree-badge { font-size: 0.65rem; }
+  .lpc-photo { width: 70px; height: 70px; }
+  .lpc-info b { font-size: 0.88rem; }
+  .lpc-info span { font-size: 0.75rem; }
+  .lpc-node { padding: 12px 14px; gap: 12px; }
+  .lpc-col-label { font-size: 0.68rem; }
+  .lpc-divider span { font-size: 0.85rem; padding: 10px 20px; }
+  .org-main { padding: 32px 12px 48px; }
+}
+
+/* ===== FORCE WHITE BACKGROUNDS ===== */
+.tree-node,
+.lpc-node,
+.lpc-node.mod-node,
+.lpc-node.pres-node,
+.lpc-node.vp-ext-node {
+  background: white !important;
+  color: #0d1b2e !important;
+}
+
+.lpc-node.mod-node  { background: #f0faf9 !important; }
+.lpc-node.pres-node { background: #fffbf0 !important; }
+
+.lpc-info b    { color: #0d1b2e !important; }
+.lpc-info span { color: #6b7c93 !important; }
+.tree-info h3  { color: #0d1b2e !important; }
+
+.org-main,
+.org-tree-wrap {
+  background: #f0f4f8 !important;
+  color: #0d1b2e !important;
+}
