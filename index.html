@@ -7,8 +7,49 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <link rel="stylesheet" href="extras.css" />
 </head>
 <body>
+
+  <!-- LOADING SCREEN -->
+  <div id="loadingScreen" class="loading-screen">
+    <div class="loading-inner">
+      <img src="assets/nbsc-logo.png" alt="NBSC" onerror="this.style.display='none'"/>
+      <img src="assets/logo.png" alt="GCO" onerror="this.style.display='none'"/>
+      <div class="loading-bar"><div class="loading-progress"></div></div>
+      <p>Loading...</p>
+    </div>
+  </div>
+
+  <!-- DARK MODE TOGGLE -->
+  <button id="darkModeToggle" class="dark-mode-btn" title="Toggle Dark Mode">
+    <i class="fas fa-moon" id="darkModeIcon"></i>
+  </button>
+
+  <!-- BACK TO TOP -->
+  <button id="backToTop" class="back-to-top" title="Back to Top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="lightbox">
+    <div class="lightbox-overlay"></div>
+    <div class="lightbox-content">
+      <button class="lightbox-close"><i class="fas fa-times"></i></button>
+      <img id="lightboxImg" src="" alt=""/>
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+  </div>
+
+  <!-- ANNOUNCEMENT BANNER -->
+  <div id="announcementBanner" class="announcement-banner">
+    <div class="announcement-inner">
+      <span class="ann-badge"><i class="fas fa-bullhorn"></i> Announcement</span>
+      <span class="ann-text">The Guidance &amp; Counseling Office is now accepting walk-in counseling sessions. Visit us Mon–Fri, 8AM–5PM.</span>
+      <button class="ann-close" id="annClose"><i class="fas fa-times"></i></button>
+    </div>
+  </div>
 
   <!-- TOP BAR -->
   <div class="topbar">
@@ -141,8 +182,17 @@
         <p>The elected leaders of the League of Peer Counselors</p>
       </div>
 
+      <!-- SEARCH BAR -->
+      <div class="search-bar-wrap">
+        <div class="search-bar">
+          <i class="fas fa-search"></i>
+          <input type="text" id="officerSearch" placeholder="Search officers by name or position..." />
+          <button class="search-clear" id="officerClear" style="display:none"><i class="fas fa-times"></i></button>
+        </div>
+      </div>
+
       <!-- PRESIDENT -->
-      <div class="pres-spotlight">
+      <div class="pres-spotlight" data-search="queen elizabeth largo president">
         <div class="pres-img-wrap">
           <img src="assets/quen elizabeth.png" alt="Queen Elizabeth Largo"/>
         </div>
@@ -157,13 +207,13 @@
       <!-- VP -->
       <div class="officers-row-label">Vice Presidents</div>
       <div class="vp-grid">
-        <div class="officer-tile vp-tile">
-          <div class="officer-tile-img"><img src="assets/alejaga.png" onerror="this.src='assets/default-avatar.svg'" alt="Arn Zyrus Alejaga"/><div class="tile-overlay"><a href="https://www.facebook.com/arn.zyrus.alejaga" target="_blank"><i class="fab fa-facebook-f"></i></a></div></div>
+        <div class="officer-tile vp-tile" data-search="arn zyrus alejaga vp internal">
+          <div class="officer-tile-img lightbox-trigger" data-img="assets/alejaga.png" data-caption="Arn Zyrus Alejaga — VP Internal"><img src="assets/alejaga.png" onerror="this.src='assets/default-avatar.svg'" alt="Arn Zyrus Alejaga"/><div class="tile-overlay"><a href="https://www.facebook.com/arn.zyrus.alejaga" target="_blank"><i class="fab fa-facebook-f"></i></a></div></div>
           <h4>Arn Zyrus Alejaga</h4><p>VP Internal</p>
           <a href="https://www.facebook.com/arn.zyrus.alejaga" target="_blank" class="tile-fb"><i class="fab fa-facebook-f"></i> Facebook</a>
         </div>
-        <div class="officer-tile vp-tile">
-          <div class="officer-tile-img"><img src="assets/betasa.png" onerror="this.src='assets/default-avatar.svg'" alt="Austin Betasa"/><div class="tile-overlay"><a href="https://www.facebook.com/austin.betasa" target="_blank"><i class="fab fa-facebook-f"></i></a></div></div>
+        <div class="officer-tile vp-tile" data-search="austin betasa vp external">
+          <div class="officer-tile-img lightbox-trigger" data-img="assets/betasa.png" data-caption="Austin Betasa — VP External"><img src="assets/betasa.png" onerror="this.src='assets/default-avatar.svg'" alt="Austin Betasa"/><div class="tile-overlay"><a href="https://www.facebook.com/austin.betasa" target="_blank"><i class="fab fa-facebook-f"></i></a></div></div>
           <h4>Austin Betasa</h4><p>VP External</p>
           <a href="https://www.facebook.com/austin.betasa" target="_blank" class="tile-fb"><i class="fab fa-facebook-f"></i> Facebook</a>
         </div>
@@ -171,34 +221,34 @@
 
       <!-- OTHER OFFICERS -->
       <div class="officers-row-label">Officers</div>
-      <div class="officers-tiles">
-        <div class="officer-tile">
-          <div class="officer-tile-img"><img src="assets/binayao sec.png" alt="Melcha"/><div class="tile-overlay"><a href="https://www.facebook.com/melcha.binayao" target="_blank"><i class="fab fa-facebook-f"></i></a></div></div>
+      <div class="officers-tiles" id="officersTiles">
+        <div class="officer-tile" data-search="melcha karryle joy binayao secretary">
+          <div class="officer-tile-img lightbox-trigger" data-img="assets/binayao sec.png" data-caption="Melcha Karryle Joy Binayao — Secretary"><img src="assets/binayao sec.png" alt="Melcha"/><div class="tile-overlay"><a href="https://www.facebook.com/melcha.binayao" target="_blank"><i class="fab fa-facebook-f"></i></a></div></div>
           <h4>Melcha Karryle Joy Binayao</h4><p>Secretary</p>
           <a href="https://www.facebook.com/melcha.binayao" target="_blank" class="tile-fb"><i class="fab fa-facebook-f"></i> Facebook</a>
         </div>
-        <div class="officer-tile">
-          <div class="officer-tile-img"><img src="assets/default-avatar.svg" alt="Ramxel"/><div class="tile-overlay"><a href="https://www.facebook.com/ramxel.butal" target="_blank"><i class="fab fa-facebook-f"></i></a></div></div>
+        <div class="officer-tile" data-search="ramxel butal assistant secretary">
+          <div class="officer-tile-img lightbox-trigger" data-img="assets/default-avatar.svg" data-caption="Ramxel Butal — Asst. Secretary"><img src="assets/default-avatar.svg" alt="Ramxel"/><div class="tile-overlay"><a href="https://www.facebook.com/ramxel.butal" target="_blank"><i class="fab fa-facebook-f"></i></a></div></div>
           <h4>Ramxel Butal</h4><p>Asst. Secretary</p>
           <a href="https://www.facebook.com/ramxel.butal" target="_blank" class="tile-fb"><i class="fab fa-facebook-f"></i> Facebook</a>
         </div>
-        <div class="officer-tile">
-          <div class="officer-tile-img"><img src="assets/cabasagan.png" alt="Mary"/><div class="tile-overlay"><a href="https://www.facebook.com/mary.claire.cabasagan" target="_blank"><i class="fab fa-facebook-f"></i></a></div></div>
+        <div class="officer-tile" data-search="mary claire cabasagan auditor">
+          <div class="officer-tile-img lightbox-trigger" data-img="assets/cabasagan.png" data-caption="Mary Claire Cabasagan — Auditor"><img src="assets/cabasagan.png" alt="Mary"/><div class="tile-overlay"><a href="https://www.facebook.com/mary.claire.cabasagan" target="_blank"><i class="fab fa-facebook-f"></i></a></div></div>
           <h4>Mary Claire Cabasagan</h4><p>Auditor</p>
           <a href="https://www.facebook.com/mary.claire.cabasagan" target="_blank" class="tile-fb"><i class="fab fa-facebook-f"></i> Facebook</a>
         </div>
-        <div class="officer-tile">
-          <div class="officer-tile-img"><img src="assets/alon alon.png" alt="Kyla"/><div class="tile-overlay"><a href="https://www.facebook.com/kyla.alonalon" target="_blank"><i class="fab fa-facebook-f"></i></a></div></div>
+        <div class="officer-tile" data-search="kyla alon-alon treasurer">
+          <div class="officer-tile-img lightbox-trigger" data-img="assets/alon alon.png" data-caption="Kyla Alon-alon — Treasurer"><img src="assets/alon alon.png" alt="Kyla"/><div class="tile-overlay"><a href="https://www.facebook.com/kyla.alonalon" target="_blank"><i class="fab fa-facebook-f"></i></a></div></div>
           <h4>Kyla Alon-alon</h4><p>Treasurer</p>
           <a href="https://www.facebook.com/kyla.alonalon" target="_blank" class="tile-fb"><i class="fab fa-facebook-f"></i> Facebook</a>
         </div>
-        <div class="officer-tile">
-          <div class="officer-tile-img"><img src="assets/social sulda.png" alt="Kevin"/><div class="tile-overlay"><a href="https://www.facebook.com/kevin.kirk.sulda" target="_blank"><i class="fab fa-facebook-f"></i></a></div></div>
+        <div class="officer-tile" data-search="kevin kirk sulda social media manager">
+          <div class="officer-tile-img lightbox-trigger" data-img="assets/social sulda.png" data-caption="Kevin Kirk Sulda — Social Media Manager"><img src="assets/social sulda.png" alt="Kevin"/><div class="tile-overlay"><a href="https://www.facebook.com/kevin.kirk.sulda" target="_blank"><i class="fab fa-facebook-f"></i></a></div></div>
           <h4>Kevin Kirk Sulda</h4><p>Social Media Manager</p>
           <a href="https://www.facebook.com/kevin.kirk.sulda" target="_blank" class="tile-fb"><i class="fab fa-facebook-f"></i> Facebook</a>
         </div>
-        <div class="officer-tile">
-          <div class="officer-tile-img"><img src="assets/default-avatar.svg" alt="Raven"/><div class="tile-overlay"><a href="https://www.facebook.com/raven.james.signo" target="_blank"><i class="fab fa-facebook-f"></i></a></div></div>
+        <div class="officer-tile" data-search="raven james signo social media manager">
+          <div class="officer-tile-img lightbox-trigger" data-img="assets/default-avatar.svg" data-caption="Raven James Signo — Social Media Manager"><img src="assets/default-avatar.svg" alt="Raven"/><div class="tile-overlay"><a href="https://www.facebook.com/raven.james.signo" target="_blank"><i class="fab fa-facebook-f"></i></a></div></div>
           <h4>Raven James Signo</h4><p>Social Media Manager</p>
           <a href="https://www.facebook.com/raven.james.signo" target="_blank" class="tile-fb"><i class="fab fa-facebook-f"></i> Facebook</a>
         </div>
@@ -214,52 +264,182 @@
         <h2>Members</h2>
         <p>Our dedicated peer counselors</p>
       </div>
-      <div class="members-tiles">
-        <div class="member-tile"><div class="member-tile-img"><img src="assets/j jay galagar.png" alt="J-jay"/></div><h4>J-jay Galagar</h4><p>Member</p><a href="https://www.facebook.com/jjay.galagar" target="_blank"><i class="fab fa-facebook-f"></i></a></div>
-        <div class="member-tile"><div class="member-tile-img"><img src="assets/bryle jangao.png" alt="Florante"/></div><h4>Florante Bryle Jangao</h4><p>Member</p><a href="https://www.facebook.com/brylesicles02" target="_blank"><i class="fab fa-facebook-f"></i></a></div>
-        <div class="member-tile"><div class="member-tile-img"><img src="assets/rebe.jpg" alt="Rebemae"/></div><h4>Rebemae Pagas</h4><p>Member</p><a href="https://www.facebook.com/rebensae.pagos" target="_blank"><i class="fab fa-facebook-f"></i></a></div>
-        <div class="member-tile"><div class="member-tile-img"><img src="assets/default-avatar.svg" alt="Domilyn"/></div><h4>Domilyn Alagos</h4><p>Member</p><a href="https://www.facebook.com/domilyn.alagos" target="_blank"><i class="fab fa-facebook-f"></i></a></div>
-        <div class="member-tile"><div class="member-tile-img"><img src="assets/default-avatar.svg" alt="Adrian"/></div><h4>Adrian Villanueva</h4><p>Member</p><a href="https://www.facebook.com/adrian.villanueva" target="_blank"><i class="fab fa-facebook-f"></i></a></div>
+      <div class="search-bar-wrap">
+        <div class="search-bar">
+          <i class="fas fa-search"></i>
+          <input type="text" id="memberSearch" placeholder="Search members by name..." />
+          <button class="search-clear" id="memberClear" style="display:none"><i class="fas fa-times"></i></button>
+        </div>
+      </div>
+      <div class="members-tiles" id="membersTiles">
+        <div class="member-tile" data-search="j-jay galagar member"><div class="member-tile-img lightbox-trigger" data-img="assets/j jay galagar.png" data-caption="J-jay Galagar — Member"><img src="assets/j jay galagar.png" alt="J-jay"/></div><h4>J-jay Galagar</h4><p>Member</p><a href="https://www.facebook.com/jjay.galagar" target="_blank"><i class="fab fa-facebook-f"></i></a></div>
+        <div class="member-tile" data-search="florante bryle jangao member"><div class="member-tile-img lightbox-trigger" data-img="assets/bryle jangao.png" data-caption="Florante Bryle Jangao — Member"><img src="assets/bryle jangao.png" alt="Florante"/></div><h4>Florante Bryle Jangao</h4><p>Member</p><a href="https://www.facebook.com/brylesicles02" target="_blank"><i class="fab fa-facebook-f"></i></a></div>
+        <div class="member-tile" data-search="rebemae pagas member"><div class="member-tile-img lightbox-trigger" data-img="assets/rebe.jpg" data-caption="Rebemae Pagas — Member"><img src="assets/rebe.jpg" alt="Rebemae"/></div><h4>Rebemae Pagas</h4><p>Member</p><a href="https://www.facebook.com/rebensae.pagos" target="_blank"><i class="fab fa-facebook-f"></i></a></div>
+        <div class="member-tile" data-search="domilyn alagos member"><div class="member-tile-img lightbox-trigger" data-img="assets/default-avatar.svg" data-caption="Domilyn Alagos — Member"><img src="assets/default-avatar.svg" alt="Domilyn"/></div><h4>Domilyn Alagos</h4><p>Member</p><a href="https://www.facebook.com/domilyn.alagos" target="_blank"><i class="fab fa-facebook-f"></i></a></div>
+        <div class="member-tile" data-search="adrian villanueva member"><div class="member-tile-img lightbox-trigger" data-img="assets/default-avatar.svg" data-caption="Adrian Villanueva — Member"><img src="assets/default-avatar.svg" alt="Adrian"/></div><h4>Adrian Villanueva</h4><p>Member</p><a href="https://www.facebook.com/adrian.villanueva" target="_blank"><i class="fab fa-facebook-f"></i></a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="section bg-white">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fas fa-quote-left"></i> Student Voices</span>
+        <h2>What Students Say</h2>
+        <p>Real experiences from students who reached out to the Guidance &amp; Counseling Office</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testi-quote"><i class="fas fa-quote-left"></i></div>
+          <p>"The peer counselors really helped me get through a tough semester. They listened without judgment and gave me practical advice I could actually use."</p>
+          <div class="testi-author">
+            <div class="testi-avatar"><i class="fas fa-user-graduate"></i></div>
+            <div>
+              <strong>Anonymous Student</strong>
+              <span>BSED — 2nd Year</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card testi-featured">
+          <div class="testi-quote"><i class="fas fa-quote-left"></i></div>
+          <p>"I was struggling with career decisions and didn't know who to turn to. The GCO team guided me step by step. I'm now more confident about my future path."</p>
+          <div class="testi-author">
+            <div class="testi-avatar"><i class="fas fa-user-graduate"></i></div>
+            <div>
+              <strong>Anonymous Student</strong>
+              <span>BSBA — 3rd Year</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testi-quote"><i class="fas fa-quote-left"></i></div>
+          <p>"Reaching out to the Guidance Office was the best decision I made. The counselors are approachable, kind, and truly care about student well-being."</p>
+          <div class="testi-author">
+            <div class="testi-avatar"><i class="fas fa-user-graduate"></i></div>
+            <div>
+              <strong>Anonymous Student</strong>
+              <span>BSIT — 1st Year</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="section bg-navy">
+  <section id="contact" class="contact-section">
+    <!-- Decorative background shapes -->
+    <div class="contact-bg-shape shape-1"></div>
+    <div class="contact-bg-shape shape-2"></div>
+
     <div class="container">
       <div class="section-header light">
-        <span class="section-tag light">Get in Touch</span>
+        <span class="section-tag light"><i class="fas fa-headset"></i> Get in Touch</span>
         <h2>Contact Us</h2>
-        <p>We're here to help. Reach out anytime.</p>
+        <p>We're here to listen and help. Reach out anytime.</p>
       </div>
+
       <div class="contact-layout">
-        <div class="contact-details">
-          <div class="contact-detail-item"><div class="cd-icon"><i class="fas fa-map-marker-alt"></i></div><div><h4>Location</h4><p>Kihare, Manolo Fortich, Bukidnon</p></div></div>
-          <div class="contact-detail-item"><div class="cd-icon"><i class="fas fa-phone"></i></div><div><h4>Phone</h4><p>09360363915</p></div></div>
-          <div class="contact-detail-item"><div class="cd-icon"><i class="fas fa-envelope"></i></div><div><h4>Email</h4><p>gco@nbsc.edu.ph</p></div></div>
-          <div class="contact-detail-item"><div class="cd-icon"><i class="fas fa-clock"></i></div><div><h4>Office Hours</h4><p>Monday – Friday: 8:00 AM – 5:00 PM</p></div></div>
-          <div class="contact-detail-item"><div class="cd-icon"><i class="fab fa-facebook-f"></i></div><div><h4>Facebook</h4><a href="https://www.facebook.com/profile.php?id=61553562329973" target="_blank">League of Peer Counselors — NBSC</a></div></div>
-        </div>
-        <div class="contact-form-box">
-          <h3>Send a Message</h3>
-          <form id="contactForm">
-            <div class="form-row">
-              <input type="text" id="from_name" placeholder="Your Name" required />
-              <input type="email" id="from_email" placeholder="Your Email" required />
+
+        <!-- LEFT: Info cards -->
+        <div class="contact-info-side">
+          <div class="contact-info-card">
+            <div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="ci-text">
+              <h4>Location</h4>
+              <p>Kihare, Manolo Fortich, Bukidnon</p>
             </div>
-            <select id="concern">
-              <option value="">Select Concern</option>
-              <option>Peer Counseling Session</option>
-              <option>Academic Concern</option>
-              <option>Personal / Social Concern</option>
-              <option>Career Guidance</option>
-              <option>Appointment Request</option>
-              <option>Others</option>
-            </select>
-            <textarea id="message" placeholder="Your Message" rows="4" required></textarea>
-            <button type="submit"><i class="fas fa-paper-plane"></i> Send Message</button>
+          </div>
+          <div class="contact-info-card">
+            <div class="ci-icon"><i class="fas fa-phone-alt"></i></div>
+            <div class="ci-text">
+              <h4>Phone</h4>
+              <p><a href="tel:09360363915">09360363915</a></p>
+            </div>
+          </div>
+          <div class="contact-info-card">
+            <div class="ci-icon"><i class="fas fa-envelope-open-text"></i></div>
+            <div class="ci-text">
+              <h4>Email</h4>
+              <p><a href="mailto:gco@nbsc.edu.ph">gco@nbsc.edu.ph</a></p>
+            </div>
+          </div>
+          <div class="contact-info-card">
+            <div class="ci-icon"><i class="fas fa-clock"></i></div>
+            <div class="ci-text">
+              <h4>Office Hours</h4>
+              <p>Monday – Friday<br/><strong>8:00 AM – 5:00 PM</strong></p>
+            </div>
+          </div>
+          <div class="contact-info-card">
+            <div class="ci-icon"><i class="fab fa-facebook-f"></i></div>
+            <div class="ci-text">
+              <h4>Facebook Page</h4>
+              <a href="https://www.facebook.com/profile.php?id=61553562329973" target="_blank" class="ci-link">
+                League of Peer Counselors — NBSC <i class="fas fa-external-link-alt"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="contact-note">
+            <i class="fas fa-shield-alt"></i>
+            <span>Your message is sent directly to our office email. All inquiries are kept confidential.</span>
+          </div>
+        </div>
+
+        <!-- RIGHT: Form -->
+        <div class="contact-form-wrap">
+          <div class="contact-form-header">
+            <div class="cfh-icon"><i class="fas fa-paper-plane"></i></div>
+            <div>
+              <h3>Send a Message</h3>
+              <p>Fill out the form and we'll get back to you shortly.</p>
+            </div>
+          </div>
+
+          <form id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="from_name"><i class="fas fa-user"></i> Full Name</label>
+                <input type="text" id="from_name" name="from_name" placeholder="e.g. Juan Dela Cruz" required />
+              </div>
+              <div class="form-group">
+                <label for="from_email"><i class="fas fa-at"></i> Email Address</label>
+                <input type="email" id="from_email" name="from_email" placeholder="your@email.com" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="concern"><i class="fas fa-tag"></i> Concern</label>
+              <div class="select-wrap">
+                <select id="concern" name="concern">
+                  <option value="">— Select your concern —</option>
+                  <option>Peer Counseling Session</option>
+                  <option>Academic Concern</option>
+                  <option>Personal / Social Concern</option>
+                  <option>Career Guidance</option>
+                  <option>Appointment Request</option>
+                  <option>Others</option>
+                </select>
+                <i class="fas fa-chevron-down select-arrow"></i>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="message"><i class="fas fa-comment-dots"></i> Message</label>
+              <textarea id="message" name="message" placeholder="Write your message here..." rows="5" required></textarea>
+            </div>
+
+            <button type="submit" class="btn-send" id="sendBtn">
+              <span class="btn-send-text"><i class="fas fa-paper-plane"></i> Send Message</span>
+              <span class="btn-send-loading" style="display:none"><i class="fas fa-spinner fa-spin"></i> Sending...</span>
+            </button>
+
+            <div id="formFeedback" class="form-feedback" style="display:none"></div>
           </form>
         </div>
+
       </div>
     </div>
   </section>
@@ -285,5 +465,6 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="extras.js"></script>
 </body>
 </html>
