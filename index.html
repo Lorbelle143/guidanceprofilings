@@ -294,9 +294,9 @@
         <p>We're here to listen and help. Reach out anytime.</p>
       </div>
 
-      <div class="contact-layout">
+      <div class="contact-layout contact-layout-single">
 
-        <!-- LEFT: Info cards -->
+        <!-- Info cards -->
         <div class="contact-info-side">
           <div class="contact-info-card">
             <div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div>
@@ -335,63 +335,6 @@
               </a>
             </div>
           </div>
-
-          <div class="contact-note">
-            <i class="fas fa-shield-alt"></i>
-            <span>Your message is sent directly to our office email. All inquiries are kept confidential.</span>
-          </div>
-        </div>
-
-        <!-- RIGHT: Form -->
-        <div class="contact-form-wrap">
-          <div class="contact-form-header">
-            <div class="cfh-icon"><i class="fas fa-paper-plane"></i></div>
-            <div>
-              <h3>Send a Message</h3>
-              <p>Fill out the form and we'll get back to you shortly.</p>
-            </div>
-          </div>
-
-          <form id="contactForm" novalidate>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="from_name"><i class="fas fa-user"></i> Full Name</label>
-                <input type="text" id="from_name" name="from_name" placeholder="e.g. Juan Dela Cruz" required />
-              </div>
-              <div class="form-group">
-                <label for="from_email"><i class="fas fa-at"></i> Email Address</label>
-                <input type="email" id="from_email" name="from_email" placeholder="your@email.com" required />
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="concern"><i class="fas fa-tag"></i> Concern</label>
-              <div class="select-wrap">
-                <select id="concern" name="concern">
-                  <option value="">— Select your concern —</option>
-                  <option>Peer Counseling Session</option>
-                  <option>Academic Concern</option>
-                  <option>Personal / Social Concern</option>
-                  <option>Career Guidance</option>
-                  <option>Appointment Request</option>
-                  <option>Others</option>
-                </select>
-                <i class="fas fa-chevron-down select-arrow"></i>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="message"><i class="fas fa-comment-dots"></i> Message</label>
-              <textarea id="message" name="message" placeholder="Write your message here..." rows="5" required></textarea>
-            </div>
-
-            <button type="submit" class="btn-send" id="sendBtn">
-              <span class="btn-send-text"><i class="fas fa-paper-plane"></i> Send Message</span>
-              <span class="btn-send-loading" style="display:none"><i class="fas fa-spinner fa-spin"></i> Sending...</span>
-            </button>
-
-            <div id="formFeedback" class="form-feedback" style="display:none"></div>
-          </form>
         </div>
 
       </div>

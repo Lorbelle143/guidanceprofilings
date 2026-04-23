@@ -1050,6 +1050,12 @@ img {
   align-items: start;
 }
 
+.contact-layout-single {
+  grid-template-columns: 1fr;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
 /* Info side */
 .contact-info-side {
   display: flex;
