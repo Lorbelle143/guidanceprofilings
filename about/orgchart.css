@@ -55,6 +55,7 @@
 .node-vp        { border-left-color: #0d1b2e; }
 .node-dean      { border-left-color: #2d9cdb; }
 .node-head      { border-left-color: #1a7a6e; }
+.node-admin     { border-left-color: #6b7c93; }
 
 /* BIG PHOTO */
 .tree-photo {
@@ -71,6 +72,7 @@
 .node-vp        .tree-photo { border-color: #0d1b2e; }
 .node-dean      .tree-photo { border-color: #2d9cdb; }
 .node-head      .tree-photo { border-color: #1a7a6e; }
+.node-admin     .tree-photo { border-color: #6b7c93; }
 
 .tree-photo img {
   width: 100%;
