@@ -3,7 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="NBSC Guidance & Counseling Office — League of Peer Counselors. Dedicated to peer support, holistic development, and transformative student growth at Northern Bukidnon State College." />
+  <meta name="keywords" content="NBSC, Northern Bukidnon State College, Guidance Counseling, Peer Counselors, GCO, Manolo Fortich, Bukidnon" />
+  <meta name="author" content="NBSC Guidance & Counseling Office" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Guidance & Counseling Office — NBSC League of Peer Counselors" />
+  <meta property="og:description" content="A student-led organization under the Guidance & Counseling Office of Northern Bukidnon State College — dedicated to peer support, holistic development, and transformative student growth." />
+  <meta property="og:image" content="assets/building.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="NBSC Guidance & Counseling Office" />
+  <meta name="twitter:description" content="League of Peer Counselors — Northern Bukidnon State College" />
   <title>Guidance & Counseling Office — NBSC League of Peer Counselors</title>
+  <link rel="icon" href="assets/nbsc-logo.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/nbsc-logo.png" />
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#1a7a6e" />
   <link rel="stylesheet" href="style.css" />
@@ -11,29 +24,37 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <link rel="stylesheet" href="extras.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "NBSC Guidance & Counseling Office",
+    "alternateName": "NBSC GCO",
+    "url": "https://nbsc-gco.vercel.app",
+    "logo": "https://nbsc-gco.vercel.app/assets/nbsc-logo.png",
+    "description": "League of Peer Counselors under the Guidance & Counseling Office of Northern Bukidnon State College",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Kihare",
+      "addressLocality": "Manolo Fortich",
+      "addressRegion": "Bukidnon",
+      "addressCountry": "PH"
+    },
+    "telephone": "09360363915",
+    "email": "gco@nbsc.edu.ph",
+    "openingHours": "Mo-Fr 08:00-17:00",
+    "sameAs": ["https://www.facebook.com/profile.php?id=61553562329973"]
+  }
+  </script>
 </head>
 <body>
   <!-- CUSTOM CURSOR -->
-  <div id="cursorDot" class="cursor-dot"></div>
-  <div id="cursorRing" class="cursor-ring"></div>
-
-  <!-- LOADING SCREEN -->
-  <div id="loadingScreen" class="loading-screen">
-    <div class="loading-inner">
-      <img src="assets/nbsc-logo.png" alt="NBSC" onerror="this.style.display='none'"/>
-      <img src="assets/logo.png" alt="GCO" onerror="this.style.display='none'"/>
-      <div class="loading-bar"><div class="loading-progress"></div></div>
-      <p>Loading...</p>
-    </div>
-  </div>
-
-  <!-- DARK MODE TOGGLE -->
-  <button id="darkModeToggle" class="dark-mode-btn" title="Toggle Dark Mode">
+  <button id="darkModeToggle" class="dark-mode-btn" title="Toggle Dark Mode" aria-label="Toggle dark mode">
     <i class="fas fa-moon" id="darkModeIcon"></i>
   </button>
 
   <!-- BACK TO TOP -->
-  <button id="backToTop" class="back-to-top" title="Back to Top">
+  <button id="backToTop" class="back-to-top" title="Back to Top" aria-label="Back to top">
     <i class="fas fa-chevron-up"></i>
   </button>
 
@@ -64,9 +85,9 @@
       <span><i class="fas fa-clock"></i> Mon–Fri: 8:00 AM – 5:00 PM</span>
     </div>
     <div class="topbar-right">
-      <a href="https://www.facebook.com/profile.php?id=61553562329973" target="_blank"><i class="fab fa-facebook-f"></i></a>
-      <a href="https://mail.google.com/mail/?view=cm&to=gco@nbsc.edu.ph" target="_blank"><i class="fas fa-envelope"></i></a>
-      <a href="https://nbsc.edu.ph" target="_blank" class="topbar-website">nbsc.edu.ph</a>
+      <a href="https://www.facebook.com/profile.php?id=61553562329973" target="_blank" rel="noopener noreferrer" aria-label="Facebook Page"><i class="fab fa-facebook-f"></i></a>
+      <a href="mailto:gco@nbsc.edu.ph" aria-label="Email us"><i class="fas fa-envelope"></i></a>
+      <a href="https://nbsc.edu.ph" target="_blank" rel="noopener noreferrer" class="topbar-website">nbsc.edu.ph</a>
     </div>
   </div>
 
@@ -97,7 +118,7 @@
         <a href="#members" class="nav-link">Members</a>
         <a href="#contact" class="nav-link nav-cta">Contact Us</a>
       </nav>
-      <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false"><i class="fas fa-bars"></i></button>
     </div>
   </header>
 
@@ -218,9 +239,9 @@
           <h4>Arn Zyrus Alejaga</h4><p>VP Internal</p>
           <a href="https://www.facebook.com/arn.zyrus.alejaga" target="_blank" class="tile-fb"><i class="fab fa-facebook-f"></i> Facebook</a>
         </div>
-        <div class="officer-tile vp-tile" data-search="austin betasa vp external">
-          <div class="officer-tile-img lightbox-trigger" data-img="assets/betasa.png" data-caption="Austin Betasa — VP External"><img src="assets/betasa.png" onerror="this.src='assets/default-avatar.svg'" alt="Austin Betasa"/><div class="tile-overlay"><a href="https://www.facebook.com/austin.betasa" target="_blank"><i class="fab fa-facebook-f"></i></a></div></div>
-          <h4>Austin Betasa</h4><p>VP External</p>
+        <div class="officer-tile vp-tile" data-search="justine betasa vp external">
+          <div class="officer-tile-img lightbox-trigger" data-img="assets/betasa.png" data-caption="Justine Betasa — VP External"><img src="assets/betasa.png" onerror="this.src='assets/default-avatar.svg'" alt="Justine Betasa"/><div class="tile-overlay"><a href="https://www.facebook.com/austin.betasa" target="_blank"><i class="fab fa-facebook-f"></i></a></div></div>
+          <h4>Justine Betasa</h4><p>VP External</p>
           <a href="https://www.facebook.com/austin.betasa" target="_blank" class="tile-fb"><i class="fab fa-facebook-f"></i> Facebook</a>
         </div>
       </div>
@@ -360,22 +381,14 @@
       </div>
       <p class="footer-copy">&copy; 2026 NBSC Guidance &amp; Counseling Office. All rights reserved.</p>
       <div class="footer-socials">
-        <a href="https://www.facebook.com/profile.php?id=61553562329973" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://mail.google.com/mail/?view=cm&to=gco@nbsc.edu.ph" target="_blank"><i class="fas fa-envelope"></i></a>
-        <a href="https://nbsc.edu.ph" target="_blank"><i class="fas fa-globe"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=61553562329973" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="mailto:gco@nbsc.edu.ph" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        <a href="https://nbsc.edu.ph" target="_blank" rel="noopener noreferrer" aria-label="NBSC Website"><i class="fas fa-globe"></i></a>
       </div>
     </div>
   </footer>
 
   <script src="script.js"></script>
   <script src="extras.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-          .catch(err => console.warn('SW registration failed:', err));
-      });
-    }
-  </script>
 </body>
 </html>

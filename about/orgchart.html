@@ -3,14 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Organizational Structure of NBSC Guidance & Counseling Office — League of Peer Counselors, Northern Bukidnon State College." />
+  <meta name="robots" content="index, follow" />
   <title>Organizational Structure — NBSC Guidance Office</title>
+  <link rel="icon" href="../assets/nbsc-logo.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../assets/nbsc-logo.png" />
   <link rel="stylesheet" href="../style.css" />
   <link rel="stylesheet" href="about.css" />
   <link rel="stylesheet" href="orgchart.css" />
+  <link rel="stylesheet" href="../extras.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 </head>
 <body>
+  <button id="darkModeToggle" class="dark-mode-btn" title="Toggle Dark Mode"><i class="fas fa-moon" id="darkModeIcon"></i></button>
+  <button id="backToTop" class="back-to-top" title="Back to Top"><i class="fas fa-chevron-up"></i></button>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="lightbox">
+    <div class="lightbox-overlay"></div>
+    <div class="lightbox-content">
+      <button class="lightbox-close"><i class="fas fa-times"></i></button>
+      <img id="lightboxImg" src="" alt=""/>
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+  </div>
 
   <div class="topbar">
     <div class="topbar-inner">
@@ -51,6 +68,7 @@
         <a href="../index.html#members" class="nav-link">Members</a>
         <a href="../index.html#contact" class="nav-link nav-cta">Contact Us</a>
       </nav>
+      <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
     </div>
   </header>
 
@@ -76,7 +94,7 @@
       <!-- LEVEL 1: COLLEGE PRESIDENT -->
       <div class="tree-level">
         <div class="tree-node node-president">
-          <div class="tree-photo">
+          <div class="tree-photo lightbox-trigger" data-img="../assets/college president.png" data-caption="Christie Jean Villanueva-Ganiera, Ed.D, CESE — College President">
             <img src="../assets/college president.png" onerror="this.src='../assets/default-avatar.svg'" alt="College President"/>
           </div>
           <div class="tree-info">
@@ -91,7 +109,7 @@
       <!-- LEVEL 2: VP ACADEMIC AFFAIRS -->
       <div class="tree-level">
         <div class="tree-node node-vp">
-          <div class="tree-photo">
+          <div class="tree-photo lightbox-trigger" data-img="../assets/vice presi.png" data-caption="Jovelyn G. Delosa, PhD — VP for Academic Affairs">
             <img src="../assets/vice presi.png" onerror="this.src='../assets/default-avatar.svg'" alt="VP Academic Affairs"/>
           </div>
           <div class="tree-info">
@@ -106,7 +124,7 @@
       <!-- LEVEL 3: DEAN -->
       <div class="tree-level">
         <div class="tree-node node-dean">
-          <div class="tree-photo">
+          <div class="tree-photo lightbox-trigger" data-img="../assets/dean.jpg" data-caption="Rowena E. Bagongon — Director, Student Affairs and Student Services Division">
             <img src="../assets/dean.jpg" onerror="this.src='../assets/default-avatar.svg'" alt="Dean of Student Affairs"/>
           </div>
           <div class="tree-info">
@@ -121,7 +139,7 @@
       <!-- LEVEL 4: GUIDANCE HEAD -->
       <div class="tree-level">
         <div class="tree-node node-head">
-          <div class="tree-photo">
+          <div class="tree-photo lightbox-trigger" data-img="../assets/sir jo.png" data-caption="Jo Augustine Corpuz — Head, Guidance & Counseling Office">
             <img src="../assets/sir jo.png" onerror="this.src='../assets/default-avatar.svg'" alt="Jo Augustine Corpuz"/>
           </div>
           <div class="tree-info">
@@ -136,12 +154,40 @@
       <!-- LEVEL 4B: ADMINISTRATIVE AID V -->
       <div class="tree-level">
         <div class="tree-node node-admin">
-          <div class="tree-photo">
+          <div class="tree-photo lightbox-trigger" data-img="../assets/sir ford.png" data-caption="John Ford Ganzan — Administrative Aid V">
             <img src="../assets/sir ford.png" onerror="this.src='../assets/default-avatar.svg'" alt="John Ford Ganzan"/>
           </div>
           <div class="tree-info">
             <span class="tree-badge badge-navy">Administrative Aid V</span>
             <h3>John Ford Ganzan</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="tree-connector-v"></div>
+
+      <!-- GUIDANCE COUNSELORS & FACULTY -->
+      <div class="gc-section">
+        <div class="gc-col">
+          <div class="gc-col-label"><i class="fas fa-user-md"></i> Guidance Counselors</div>
+          <div class="gc-node lightbox-trigger" data-img="../assets/franco.jpg" data-caption="Franco Ceasar M. Agbalog, MA, RPsy — Guidance Counselor">
+            <div class="gc-photo"><img src="../assets/franco.jpg" alt="Franco Ceasar M. Agbalog"/></div>
+            <div class="gc-info">
+              <b>Franco Ceasar M. Agbalog</b>
+              <span>MA, RPsy</span>
+              <em>Guidance Counselor</em>
+            </div>
+          </div>
+        </div>
+        <div class="gc-col">
+          <div class="gc-col-label"><i class="fas fa-chalkboard-teacher"></i> Faculty Member</div>
+          <div class="gc-node lightbox-trigger" data-img="../assets/maam jamora.png" data-caption="Maria Michaella Q. Jamora, MS — Faculty Member">
+            <div class="gc-photo"><img src="../assets/maam jamora.png" alt="Maria Michaella Q. Jamora"/></div>
+            <div class="gc-info">
+              <b>Maria Michaella Q. Jamora</b>
+              <span>MS</span>
+              <em>Faculty Member</em>
+            </div>
           </div>
         </div>
       </div>
@@ -161,23 +207,23 @@
         <!-- LEFT: Moderators + Left Officers -->
         <div class="lpc-col">
           <div class="lpc-col-label">Moderators &amp; Officers</div>
-          <div class="lpc-node mod-node">
+          <div class="lpc-node mod-node lightbox-trigger" data-img="../assets/sir jo.png" data-caption="Jo Augustine Corpuz — Moderator">
             <div class="lpc-photo"><img src="../assets/sir jo.png" onerror="this.src='../assets/default-avatar.svg'"/></div>
             <div class="lpc-info"><b>Jo Augustine Corpuz</b><span>Moderator</span></div>
           </div>
-          <div class="lpc-node">
+          <div class="lpc-node lightbox-trigger" data-img="../assets/sir ford.png" data-caption="John Ford Ganzan — Asst. Moderator">
             <div class="lpc-photo"><img src="../assets/sir ford.png" onerror="this.src='../assets/default-avatar.svg'"/></div>
             <div class="lpc-info"><b>John Ford Ganzan</b><span>Asst. Moderator</span></div>
           </div>
-          <div class="lpc-node">
+          <div class="lpc-node lightbox-trigger" data-img="../assets/cabasagan.png" data-caption="Mary Claire Cabasagan — Auditor">
             <div class="lpc-photo"><img src="../assets/cabasagan.png" onerror="this.src='../assets/default-avatar.svg'"/></div>
             <div class="lpc-info"><b>Mary Claire Cabasagan</b><span>Auditor</span></div>
           </div>
-          <div class="lpc-node">
+          <div class="lpc-node lightbox-trigger" data-img="../assets/alon alon.png" data-caption="Kyla Alon-alon — Treasurer">
             <div class="lpc-photo"><img src="../assets/alon alon.png" onerror="this.src='../assets/default-avatar.svg'"/></div>
             <div class="lpc-info"><b>Kyla Alon-alon</b><span>Treasurer</span></div>
           </div>
-          <div class="lpc-node">
+          <div class="lpc-node lightbox-trigger" data-img="../assets/social sulda.png" data-caption="Kevin Kirk Sulda — Social Media Manager">
             <div class="lpc-photo"><img src="../assets/social sulda.png" onerror="this.src='../assets/default-avatar.svg'"/></div>
             <div class="lpc-info"><b>Kevin Kirk Sulda</b><span>Social Media Manager</span></div>
           </div>
@@ -186,23 +232,23 @@
         <!-- CENTER: President + Officers -->
         <div class="lpc-col lpc-center">
           <div class="lpc-col-label">Executive Officers</div>
-          <div class="lpc-node pres-node">
+          <div class="lpc-node pres-node lightbox-trigger" data-img="../assets/quen elizabeth.png" data-caption="Queen Elizabeth Largo — President">
             <div class="lpc-photo"><img src="../assets/quen elizabeth.png" onerror="this.src='../assets/default-avatar.svg'"/></div>
             <div class="lpc-info"><b>Queen Elizabeth Largo</b><span>President</span></div>
           </div>
-          <div class="lpc-node">
+          <div class="lpc-node lightbox-trigger" data-img="../assets/alejaga.png" data-caption="Arn Zyrus Alejaga — VP Internal">
             <div class="lpc-photo"><img src="../assets/alejaga.png" onerror="this.src='../assets/default-avatar.svg'"/></div>
             <div class="lpc-info"><b>Arn Zyrus Alejaga</b><span>VP Internal</span></div>
           </div>
-          <div class="lpc-node">
+          <div class="lpc-node lightbox-trigger" data-img="../assets/binayao sec.png" data-caption="Melcha Karryle Joy Binayao — Secretary">
             <div class="lpc-photo"><img src="../assets/binayao sec.png" onerror="this.src='../assets/default-avatar.svg'"/></div>
             <div class="lpc-info"><b>Melcha Karryle Joy Binayao</b><span>Secretary</span></div>
           </div>
-          <div class="lpc-node">
+          <div class="lpc-node lightbox-trigger" data-img="../assets/default-avatar.svg" data-caption="Ramxel Butal — Asst. Secretary">
             <div class="lpc-photo"><img src="../assets/default-avatar.svg"/></div>
             <div class="lpc-info"><b>Ramxel Butal</b><span>Asst. Secretary</span></div>
           </div>
-          <div class="lpc-node">
+          <div class="lpc-node lightbox-trigger" data-img="../assets/default-avatar.svg" data-caption="Raven James Signo — Social Media Manager">
             <div class="lpc-photo"><img src="../assets/default-avatar.svg"/></div>
             <div class="lpc-info"><b>Raven James Signo</b><span>Social Media Manager</span></div>
           </div>
@@ -211,27 +257,27 @@
         <!-- RIGHT: VP External + Members -->
         <div class="lpc-col">
           <div class="lpc-col-label">VP External &amp; Members</div>
-          <div class="lpc-node vp-ext-node">
+          <div class="lpc-node vp-ext-node lightbox-trigger" data-img="../assets/betasa.png" data-caption="Justine Betasa — VP External">
             <div class="lpc-photo"><img src="../assets/betasa.png" onerror="this.src='../assets/default-avatar.svg'"/></div>
-            <div class="lpc-info"><b>Austin Betasa</b><span>VP External</span></div>
+            <div class="lpc-info"><b>Justine Betasa</b><span>VP External</span></div>
           </div>
-          <div class="lpc-node">
+          <div class="lpc-node lightbox-trigger" data-img="../assets/j jay galagar.png" data-caption="J-jay Galagar — Member">
             <div class="lpc-photo"><img src="../assets/j jay galagar.png" onerror="this.src='../assets/default-avatar.svg'"/></div>
             <div class="lpc-info"><b>J-jay Galagar</b><span>Member</span></div>
           </div>
-          <div class="lpc-node">
+          <div class="lpc-node lightbox-trigger" data-img="../assets/bryle jangao.png" data-caption="Florante Bryle Jangao — Member">
             <div class="lpc-photo"><img src="../assets/bryle jangao.png" onerror="this.src='../assets/default-avatar.svg'"/></div>
             <div class="lpc-info"><b>Florante Bryle Jangao</b><span>Member</span></div>
           </div>
-          <div class="lpc-node">
+          <div class="lpc-node lightbox-trigger" data-img="../assets/rebe.jpg" data-caption="Rebemae Pagas — Member">
             <div class="lpc-photo"><img src="../assets/rebe.jpg" onerror="this.src='../assets/default-avatar.svg'"/></div>
             <div class="lpc-info"><b>Rebemae Pagas</b><span>Member</span></div>
           </div>
-          <div class="lpc-node">
+          <div class="lpc-node lightbox-trigger" data-img="../assets/alagos.png" data-caption="Domilyn Alagos — Member">
             <div class="lpc-photo"><img src="../assets/alagos.png" onerror="this.src='../assets/default-avatar.svg'"/></div>
             <div class="lpc-info"><b>Domilyn Alagos</b><span>Member</span></div>
           </div>
-          <div class="lpc-node">
+          <div class="lpc-node lightbox-trigger" data-img="../assets/default-avatar.svg" data-caption="Adrian Villanueva — Member">
             <div class="lpc-photo"><img src="../assets/default-avatar.svg"/></div>
             <div class="lpc-info"><b>Adrian Villanueva</b><span>Member</span></div>
           </div>
@@ -258,5 +304,6 @@
   </footer>
 
   <script src="about.js"></script>
+  <script src="../extras.js"></script>
 </body>
 </html>

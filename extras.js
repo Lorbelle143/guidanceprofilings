@@ -1,28 +1,18 @@
 // =============================================================
 //  NBSC GCO — Extras JS
-//  Loading Screen · Dark Mode · Back to Top · Lightbox
-//  Announcement Banner · Search/Filter
+//  Dark Mode · Back to Top · Lightbox · Announcement Banner · Search/Filter
 // =============================================================
-
-// ===== LOADING SCREEN =====
-window.addEventListener('load', function () {
-  const loader = document.getElementById('loadingScreen');
-  if (loader) {
-    setTimeout(() => loader.classList.add('hidden'), 800);
-  }
-});
 
 // ===== ANNOUNCEMENT BANNER =====
 const annClose = document.getElementById('annClose');
 const annBanner = document.getElementById('announcementBanner');
 if (annClose && annBanner) {
-  // Restore dismissed state
-  if (sessionStorage.getItem('annDismissed')) {
+  if (localStorage.getItem('annDismissed')) {
     annBanner.classList.add('dismissed');
   }
   annClose.addEventListener('click', () => {
     annBanner.classList.add('dismissed');
-    sessionStorage.setItem('annDismissed', '1');
+    localStorage.setItem('annDismissed', '1');
   });
 }
 
@@ -32,14 +22,20 @@ const darkIcon = document.getElementById('darkModeIcon');
 
 function applyDark(on) {
   document.body.classList.toggle('dark-mode', on);
-  if (darkIcon) {
-    darkIcon.className = on ? 'fas fa-sun' : 'fas fa-moon';
-  }
+  document.documentElement.removeAttribute('data-dark');
+  if (darkIcon) darkIcon.className = on ? 'fas fa-sun' : 'fas fa-moon';
+  if (darkBtn)  darkBtn.setAttribute('aria-label', on ? 'Switch to light mode' : 'Switch to dark mode');
 }
 
-// Restore preference
-const savedDark = localStorage.getItem('darkMode') === 'true';
-applyDark(savedDark);
+// Restore from localStorage or system preference
+const savedDark   = localStorage.getItem('darkMode');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+applyDark(savedDark === 'true' || (savedDark === null && prefersDark));
+
+// Listen for system preference changes
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+  if (localStorage.getItem('darkMode') === null) applyDark(e.matches);
+});
 
 if (darkBtn) {
   darkBtn.addEventListener('click', () => {
@@ -165,7 +161,7 @@ if (officerInput) {
 
 // =============================================================
 //  VISUAL ENHANCEMENTS
-//  Particles · Animated Counter · Custom Cursor
+//  Particles · Animated Counter
 // =============================================================
 
 // ===== HERO PARTICLES =====
@@ -259,55 +255,4 @@ if (officerInput) {
   counters.forEach(el => observer.observe(el));
 })();
 
-// ===== CUSTOM CURSOR =====
-(function () {
-  const dot  = document.getElementById('cursorDot');
-  const ring = document.getElementById('cursorRing');
-  if (!dot || !ring) return;
-
-  // Only on non-touch devices
-  if (window.matchMedia('(pointer: coarse)').matches) return;
-
-  let mouseX = 0, mouseY = 0;
-  let ringX  = 0, ringY  = 0;
-
-  document.addEventListener('mousemove', e => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    dot.style.left = mouseX + 'px';
-    dot.style.top  = mouseY + 'px';
-  });
-
-  // Smooth ring follow
-  function animateRing() {
-    ringX += (mouseX - ringX) * 0.12;
-    ringY += (mouseY - ringY) * 0.12;
-    ring.style.left = ringX + 'px';
-    ring.style.top  = ringY + 'px';
-    requestAnimationFrame(animateRing);
-  }
-  animateRing();
-
-  // Hover effect on interactive elements
-  const hoverTargets = 'a, button, .officer-tile, .member-tile, .mod-card, .lightbox-trigger, .stat-box, .contact-info-card';
-  document.querySelectorAll(hoverTargets).forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      dot.classList.add('hovered');
-      ring.classList.add('hovered');
-    });
-    el.addEventListener('mouseleave', () => {
-      dot.classList.remove('hovered');
-      ring.classList.remove('hovered');
-    });
-  });
-
-  // Hide when leaving window
-  document.addEventListener('mouseleave', () => {
-    dot.style.opacity  = '0';
-    ring.style.opacity = '0';
-  });
-  document.addEventListener('mouseenter', () => {
-    dot.style.opacity  = '1';
-    ring.style.opacity = '1';
-  });
-})();
+// end of extras.js

@@ -4,72 +4,6 @@
    Announcement Banner · Search/Filter · Testimonials
    ============================================================= */
 
-/* ===== LOADING SCREEN ===== */
-.loading-screen {
-  position: fixed;
-  inset: 0;
-  background: #0d1b2e;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
-}
-
-.loading-screen.hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.loading-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-}
-
-.loading-inner img {
-  height: 60px;
-  object-fit: contain;
-  animation: loadPulse 1.2s ease-in-out infinite alternate;
-}
-
-.loading-inner img:first-child { animation-delay: 0s; }
-.loading-inner img:last-of-type { animation-delay: 0.2s; }
-
-@keyframes loadPulse {
-  from { opacity: 0.5; transform: scale(0.95); }
-  to   { opacity: 1;   transform: scale(1.05); }
-}
-
-.loading-bar {
-  width: 180px;
-  height: 4px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.loading-progress {
-  height: 100%;
-  background: linear-gradient(90deg, #1a7a6e, #4ecdc4);
-  border-radius: 4px;
-  animation: loadBar 1.5s ease-in-out forwards;
-}
-
-@keyframes loadBar {
-  from { width: 0%; }
-  to   { width: 100%; }
-}
-
-.loading-inner p {
-  color: rgba(255,255,255,0.5);
-  font-size: 0.8rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
 /* ===== DARK MODE TOGGLE ===== */
 .dark-mode-btn {
   position: fixed;
@@ -601,55 +535,6 @@ body.dark-mode .dark-mode-btn {
    VISUAL ENHANCEMENTS
    Particles · Glassmorphism · Gradient Text · Custom Cursor
    ============================================================= */
-
-/* ===== CUSTOM CURSOR ===== */
-@media (pointer: fine) {
-  body { cursor: none; }
-  a, button, .officer-tile, .member-tile, .mod-card,
-  .lightbox-trigger, .nav-link, .btn-hero-primary, .btn-hero-ghost {
-    cursor: none;
-  }
-}
-
-.cursor-dot {
-  width: 8px;
-  height: 8px;
-  background: #4ecdc4;
-  border-radius: 50%;
-  position: fixed;
-  top: 0; left: 0;
-  pointer-events: none;
-  z-index: 99999;
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s ease, background 0.2s;
-  will-change: transform;
-}
-
-.cursor-ring {
-  width: 36px;
-  height: 36px;
-  border: 2px solid rgba(78,205,196,0.6);
-  border-radius: 50%;
-  position: fixed;
-  top: 0; left: 0;
-  pointer-events: none;
-  z-index: 99998;
-  transform: translate(-50%, -50%);
-  transition: width 0.2s, height 0.2s, border-color 0.2s, transform 0.08s ease;
-  will-change: transform;
-}
-
-.cursor-ring.hovered {
-  width: 52px;
-  height: 52px;
-  border-color: rgba(78,205,196,0.9);
-  background: rgba(78,205,196,0.06);
-}
-
-.cursor-dot.hovered {
-  transform: translate(-50%, -50%) scale(1.8);
-  background: #1a7a6e;
-}
 
 /* ===== HERO PARTICLES CANVAS ===== */
 .hero-particles {

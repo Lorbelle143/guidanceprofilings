@@ -1,37 +1,60 @@
 // ===== NBSC GCO Service Worker =====
-const CACHE_NAME = 'nbsc-gco-v1';
+const CACHE_NAME = 'nbsc-gco-v4';
 
-// Files to cache on install
+// Core files to cache on first install
 const PRECACHE = [
-  '/',
-  '/index.html',
-  '/style.css',
-  '/extras.css',
-  '/script.js',
-  '/extras.js',
-  '/offline.html',
-  '/assets/nbsc-logo.png',
-  '/assets/logo.png',
-  '/assets/building.jpg',
-  '/assets/default-avatar.svg',
-  '/about/vision-mission.html',
-  '/about/goals-values.html',
-  '/about/quality-policy.html',
-  '/about/orgchart.html',
-  '/about/about.css',
-  '/about/about.js',
-  '/about/orgchart.css',
+  './index.html',
+  './style.css',
+  './extras.css',
+  './script.js',
+  './extras.js',
+  './offline.html',
+  './manifest.json',
+  './about/vision-mission.html',
+  './about/goals-values.html',
+  './about/quality-policy.html',
+  './about/orgchart.html',
+  './about/about.css',
+  './about/about.js',
+  './about/orgchart.css',
+  './assets/default-avatar.svg',
+  './assets/nbsc-logo.png',
+  './assets/logo.png',
+  './assets/building.jpg',
+  './assets/sir jo.png',
+  './assets/sir ford.png',
+  './assets/quen elizabeth.png',
+  './assets/alejaga.png',
+  './assets/betasa.png',
+  './assets/binayao sec.png',
+  './assets/cabasagan.png',
+  './assets/alon alon.png',
+  './assets/social sulda.png',
+  './assets/j jay galagar.png',
+  './assets/bryle jangao.png',
+  './assets/rebe.jpg',
+  './assets/alagos.png',
+  './assets/college president.png',
+  './assets/vice presi.png',
+  './assets/dean.jpg',
 ];
 
-// ===== INSTALL — cache core assets =====
+// ===== INSTALL — cache all core files =====
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(PRECACHE))
+    caches.open(CACHE_NAME).then(cache => {
+      // Cache each file individually so one failure won't block the rest
+      return Promise.allSettled(
+        PRECACHE.map(url =>
+          cache.add(url).catch(() => console.warn('[SW] Failed to cache:', url))
+        )
+      );
+    })
   );
   self.skipWaiting();
 });
 
-// ===== ACTIVATE — clean old caches =====
+// ===== ACTIVATE — remove old caches =====
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys =>
@@ -43,46 +66,64 @@ self.addEventListener('activate', event => {
   self.clients.claim();
 });
 
-// ===== FETCH — cache-first for assets, network-first for pages =====
+// ===== FETCH =====
 self.addEventListener('fetch', event => {
   const { request } = event;
-  const url = new URL(request.url);
 
-  // Only handle same-origin requests
-  if (url.origin !== location.origin) return;
+  // Only handle GET
+  if (request.method !== 'GET') return;
 
-  // For HTML pages: network-first, fallback to cache, then offline page
+  // Skip cross-origin (CDN fonts, FontAwesome, EmailJS, etc.)
+  try {
+    if (new URL(request.url).origin !== location.origin) return;
+  } catch { return; }
+
+  // HTML pages — network first, fall back to cache, then offline page
   if (request.mode === 'navigate') {
     event.respondWith(
       fetch(request)
         .then(response => {
           const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(request, clone));
+          caches.open(CACHE_NAME)
+            .then(cache => cache.put(request, clone))
+            .catch(() => {});
           return response;
         })
         .catch(() =>
-          caches.match(request).then(cached => cached || caches.match('/offline.html'))
+          caches.match(request)
+            .then(cached => cached || caches.match('./offline.html'))
         )
     );
     return;
   }
 
-  // For assets (CSS, JS, images): cache-first
+  // Everything else — cache first, then network (stale-while-revalidate)
   event.respondWith(
     caches.match(request).then(cached => {
-      if (cached) return cached;
-      return fetch(request).then(response => {
-        if (response && response.status === 200) {
+      // Return cached version immediately if available
+      const networkFetch = fetch(request).then(response => {
+        if (!response || response.status !== 200) return response;
+
+        // Don't cache large images (> 3MB)
+        const size   = parseInt(response.headers.get('content-length') || '0', 10);
+        const isImg  = request.destination === 'image';
+        const tooBig = isImg && size > 3 * 1024 * 1024;
+
+        if (!tooBig) {
           const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(request, clone));
+          caches.open(CACHE_NAME)
+            .then(cache => cache.put(request, clone))
+            .catch(() => {});
         }
         return response;
       }).catch(() => {
-        // Return offline page for image requests that fail
+        // If image fails and nothing cached, return default avatar
         if (request.destination === 'image') {
-          return caches.match('/assets/default-avatar.svg');
+          return caches.match('./assets/default-avatar.svg');
         }
       });
+
+      return cached || networkFetch;
     })
   );
 });

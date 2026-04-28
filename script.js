@@ -97,7 +97,7 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.mod-card, .officer-tile, .member-tile, .pres-spotlight, .contact-detail-item, .org-upper-node, .org-card, .stat-box').forEach(el => {
+document.querySelectorAll('.mod-card, .officer-tile, .member-tile, .pres-spotlight, .contact-info-card, .stat-box').forEach(el => {
   el.classList.add('fade-in');
   observer.observe(el);
 });
@@ -119,15 +119,16 @@ const hamburger = document.getElementById('hamburger');
 const nav = document.querySelector('.nav');
 if (hamburger && nav) {
   hamburger.addEventListener('click', () => {
-    nav.classList.toggle('open');
-    hamburger.innerHTML = nav.classList.contains('open')
+    const isOpen = nav.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', isOpen);
+    hamburger.innerHTML = isOpen
       ? '<i class="fas fa-times"></i>'
       : '<i class="fas fa-bars"></i>';
   });
-  // Close when clicking a nav link
   nav.querySelectorAll('.nav-link:not(.dropdown-btn)').forEach(link => {
     link.addEventListener('click', () => {
       nav.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
       hamburger.innerHTML = '<i class="fas fa-bars"></i>';
     });
   });
