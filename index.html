@@ -49,7 +49,6 @@
   </script>
 </head>
 <body>
-  <!-- CUSTOM CURSOR -->
   <button id="darkModeToggle" class="dark-mode-btn" title="Toggle Dark Mode" aria-label="Toggle dark mode">
     <i class="fas fa-moon" id="darkModeIcon"></i>
   </button>
@@ -114,9 +113,11 @@
             <a href="about/orgchart.html"><i class="fas fa-sitemap"></i> Organizational Structure</a>
           </div>
         </div>
+        <a href="#services" class="nav-link">Services</a>
         <a href="#moderators" class="nav-link">Moderators</a>
         <a href="#officers" class="nav-link">Officers</a>
         <a href="#members" class="nav-link">Members</a>
+        <a href="resources.html" class="nav-link">Resources</a>
         <a href="#contact" class="nav-link nav-cta">Contact Us</a>
       </nav>
       <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false"><i class="fas fa-bars"></i></button>
@@ -155,6 +156,72 @@
     </div>
   </section>
 
+  <!-- SERVICES -->
+  <section id="services" class="section bg-white">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fas fa-hands-helping"></i> What We Offer</span>
+        <h2>Our Services</h2>
+        <p>The Guidance &amp; Counseling Office provides a range of support services for every NBSC student</p>
+      </div>
+      <div class="services-grid">
+
+        <div class="service-card">
+          <div class="service-icon" style="background:linear-gradient(135deg,#1a7a6e,#4ecdc4)">
+            <i class="fas fa-comments"></i>
+          </div>
+          <h3>Peer Counseling</h3>
+          <p>One-on-one and group counseling sessions facilitated by trained peer counselors to help students navigate personal, academic, and social challenges.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon" style="background:linear-gradient(135deg,#0d1b2e,#1a3a5c)">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <h3>Academic Guidance</h3>
+          <p>Support for students experiencing academic difficulties — study strategies, course concerns, and connecting students with the right resources.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon" style="background:linear-gradient(135deg,#f5a623,#e67e22)">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <h3>Career Guidance</h3>
+          <p>Career exploration, aptitude assessments, and guidance to help students make informed decisions about their future career paths.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon" style="background:linear-gradient(135deg,#2d9cdb,#1a6fa8)">
+            <i class="fas fa-heart"></i>
+          </div>
+          <h3>Personal &amp; Social Support</h3>
+          <p>A safe, confidential space for students dealing with personal or social concerns — relationships, family issues, stress, and emotional well-being.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon" style="background:linear-gradient(135deg,#27ae60,#1e8449)">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <h3>Appointment Scheduling</h3>
+          <p>Book a counseling session with our guidance counselors. Walk-ins are welcome during office hours — Mon to Fri, 8AM to 5PM.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon" style="background:linear-gradient(135deg,#8e44ad,#6c3483)">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3>Group Activities &amp; Programs</h3>
+          <p>Workshops, seminars, and team-building activities organized by the League of Peer Counselors to promote holistic student development.</p>
+        </div>
+
+      </div>
+      <div class="services-cta">
+        <p>Need to talk to someone?</p>
+        <a href="#contact" class="btn-hero-primary"><i class="fas fa-phone-alt"></i> Contact the GCO</a>
+      </div>
+    </div>
+  </section>
+
   <!-- MODERATORS -->
   <section id="moderators" class="section bg-light">
     <div class="container">
@@ -166,7 +233,7 @@
       <div class="moderators-grid">
 
         <div class="mod-card">
-          <div class="mod-card-photo">
+          <div class="mod-card-photo lightbox-trigger" data-img="assets/sir jo.png" data-caption="Jo Augustine Corpuz — Head, Guidance & Counseling Office">
             <img src="assets/sir jo.png" onerror="this.src='assets/default-avatar.svg'" alt="Jo Augustine Corpuz"/>
             <div class="mod-card-badge">Moderator</div>
           </div>
@@ -182,7 +249,7 @@
         </div>
 
         <div class="mod-card">
-          <div class="mod-card-photo">
+          <div class="mod-card-photo lightbox-trigger" data-img="assets/sir ford.png" data-caption="John Ford Ganzan — Administrative Clerk V">
             <img src="assets/sir ford.png" onerror="this.src='assets/default-avatar.svg'" alt="John Ford Ganzan"/>
             <div class="mod-card-badge asst">Asst. Moderator</div>
           </div>
@@ -221,14 +288,14 @@
 
       <!-- PRESIDENT -->
       <div class="pres-spotlight" data-search="queen elizabeth largo president">
-        <div class="pres-img-wrap">
+        <div class="pres-img-wrap lightbox-trigger" data-img="assets/quen elizabeth.png" data-caption="Queen Elizabeth Largo — President">
           <img src="assets/quen elizabeth.png" alt="Queen Elizabeth Largo"/>
         </div>
         <div class="pres-details">
           <div class="pres-crown-tag"><i class="fas fa-crown"></i> President</div>
           <h3>Queen Elizabeth Largo</h3>
           <p>League of Peer Counselors, NBSC Guidance &amp; Counseling Office</p>
-          <a href="https://www.facebook.com/queen.elizabeth.largo" target="_blank" class="link-fb"><i class="fab fa-facebook-f"></i> Connect on Facebook</a>
+          <a href="https://www.facebook.com/el.largo.73520" target="_blank" rel="noopener noreferrer" class="link-fb"><i class="fab fa-facebook-f"></i> Connect on Facebook</a>
         </div>
       </div>
 
